@@ -1,0 +1,5 @@
+{% extends 'base.html' %}
+{% block content %}<div id="page"></div>{% endblock %}
+{% block scripts %}<script src="{{ url_for('static', filename='js/session_form.js') }}?v={{ asset_version }}"></script>
+<script src="{{ url_for('static', filename='js/portal.js') }}?v={{ asset_version }}"></script>
+<script src="{{ url_for('static', filename='js/pages/my_schedule.js') }}?v={{ asset_version }}"></script>{% endblock %}

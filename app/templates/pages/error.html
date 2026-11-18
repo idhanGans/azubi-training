@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="card">
+  <div class="state">
+    <p class="error-code" aria-hidden="true">{{ status }}</p>
+    <h2 data-i18n="err_page_{{ status if status in (404, 405, 500) else 'other' }}">{{ message }}</h2>
+    <p><a class="btn ghost sm" href="{{ url_for('pages.home') }}" data-i18n="err_page_home">Zur Startseite</a></p>
+  </div>
+</div>
+{% endblock %}

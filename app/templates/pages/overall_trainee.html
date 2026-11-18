@@ -1,0 +1,5 @@
+{% extends 'base.html' %}
+{% block content %}<div id="page" data-trainee-id="{{ trainee_id }}"></div>{% endblock %}
+{% block scripts %}<script src="{{ url_for('static', filename='js/charts.js') }}?v={{ asset_version }}"></script>
+<script src="{{ url_for('static', filename='js/overall_view.js') }}?v={{ asset_version }}"></script>
+<script src="{{ url_for('static', filename='js/pages/overall_trainee.js') }}?v={{ asset_version }}"></script>{% endblock %}

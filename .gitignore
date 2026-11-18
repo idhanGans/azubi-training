@@ -1,0 +1,19 @@
+__pycache__/
+*.pyc
+.DS_Store
+.env
+venv/
+.venv/
+*.egg-info/
+.tracer.lock
+.cp-traces/
+# Lokales Test-Dep-Verzeichnis (cp-pydeps/pip --target, da venv im Pod fehlt).
+# Bewusst auf den Repo-Root geankert — `msh deploy` macht `git add -A`.
+/.pydeps/
+/.pydeps-local/
+# von der Coding-Platform injiziert - traegt Zugangsdaten, nie committen
+/.mcp.json
+# Arbeitsablage fuer Logs/Zwischenstaende (lokale Test-DB etc.) — nie committen
+/_scratch/
+# Logs des Playwright-MCP (Browser-Tests im Agent-Pod)
+/.playwright-mcp/

@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% from '_icons.html' import icon %}
+{% block content %}
+<div class="card">
+  <div class="state">
+    <p class="state-icon">{{ icon('lock') }}</p>
+    <h2 data-i18n="noaccess_title">Kein Zugriff</h2>
+    <p data-i18n="noaccess_text">Für diese Seite fehlt Ihnen die Berechtigung. Wenn Sie Zugang benötigen, wenden Sie sich bitte an die Administration.</p>
+    {% if identity and not identity.roles %}
+    <p class="mut"><span data-i18n="noaccess_login">Angemeldet als</span> <b>{{ identity.username }}</b> — <span data-i18n="noaccess_norole">diesem Konto ist noch keine Rolle zugewiesen.</span></p>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}

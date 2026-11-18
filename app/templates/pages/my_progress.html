@@ -1,0 +1,7 @@
+{% extends 'base.html' %}
+{% block content %}<div id="page"></div>{% endblock %}
+{% block scripts %}<script src="{{ url_for('static', filename='js/attendance_form.js') }}?v={{ asset_version }}"></script>
+<script src="{{ url_for('static', filename='js/assessment_form.js') }}?v={{ asset_version }}"></script>
+<script src="{{ url_for('static', filename='js/charts.js') }}?v={{ asset_version }}"></script>
+<script src="{{ url_for('static', filename='js/progress_view.js') }}?v={{ asset_version }}"></script>
+<script src="{{ url_for('static', filename='js/pages/my_progress.js') }}?v={{ asset_version }}"></script>{% endblock %}

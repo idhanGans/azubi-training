@@ -1,0 +1,2 @@
+{# Symbol aus static/icons.svg (Linien-Icon in Textfarbe) — dekorativ, Screenreader lesen den Text daneben. #}
+{% macro icon(name, cls='') %}<svg class="ic{{ ' ' ~ cls if cls }}" aria-hidden="true" focusable="false"><use href="{{ url_for('static', filename='icons.svg') }}?v={{ asset_version }}#i-{{ name }}"></use></svg>{% endmacro %}

@@ -1,0 +1,15 @@
+Flask==3.0.3
+# Flask-Abhaengigkeiten fest, damit jeder Build dieselben (gepruefte) Versionen zieht
+Werkzeug==3.1.8
+Jinja2==3.1.6
+gunicorn==23.0.0
+SQLAlchemy==2.0.34
+Flask-SQLAlchemy==3.1.1
+Flask-Migrate==4.0.7
+alembic==1.13.2
+psycopg2-binary==2.9.9
+tzdata==2025.2
+# Downloads der Gesamtbewertung als Excel und PDF (app/services/doc_export.py)
+openpyxl==3.1.5
+fpdf2==2.8.9
+msh-base @ file:///app/msh-base

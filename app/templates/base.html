@@ -1,0 +1,73 @@
+<!doctype html>
+{% from '_icons.html' import icon %}
+<html lang="de" translate="no" data-tz="{{ tz_name }}" data-tz-label="{{ tz_label() }}" data-icons="{{ url_for('static', filename='icons.svg') }}?v={{ asset_version }}">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+{# Own translation (DE/EN/ID) — browser translators otherwise lowercase menus and mistranslate #}
+<meta name="google" content="notranslate">
+<title>{{ page_title }} · Azubi-Training</title>
+{# Dev-Desk loader (coding-platform docs/devdesk-integration, file form — no inline scripts): synchronous, before the app's scripts #}
+{% if platform_domain %}<script src="{{ url_for('static', filename='js/cp-devdesk.js') }}?v={{ asset_version }}" data-slug="azubi-training" data-domain="{{ platform_domain }}"></script>{% endif %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/app.css') }}?v={{ asset_version }}">
+</head>
+<body data-permissions="{{ identity.permissions|sort|join(' ') if identity else '' }}">
+<div class="shell">
+  <aside class="sidebar" id="sidebar" aria-label="Hauptnavigation" data-i18n-aria="nav_main">
+    <div class="brand"><span class="logo" aria-hidden="true">AT</span><div><b>Azubi-Training</b><span>Noxt × Planville</span></div></div>
+    <nav>
+      <ul class="nav">
+        {% for item in nav_items %}
+        <li><a href="{{ url_for(item.endpoint) }}"{% if (nav_active or request.endpoint) == item.endpoint %} aria-current="page"{% endif %}>
+          {{ icon(item.icon) }}<span data-i18n="{{ item.i18n_key }}">{{ item.label }}</span></a></li>
+        {% endfor %}
+      </ul>
+    </nav>
+    {% if identity %}
+    <div class="side-foot">
+      <div class="langsel" role="group" aria-label="Sprache" data-i18n-aria="language">
+        <button type="button" data-lang="de" aria-pressed="true">DE</button><button type="button" data-lang="en" aria-pressed="false">EN</button><button type="button" data-lang="id" aria-pressed="false">ID</button>
+      </div>
+      <b>{{ identity.username }}</b>
+      <span>{% for role in identity.roles|sort %}<span data-i18n="role_{{ role }}">{{ role }}</span>{% if not loop.last %}, {% endif %}{% else %}<span data-i18n="role_none">Keine Rolle</span>{% endfor %}</span>
+      {% if logout_url %}<div><a href="{{ logout_url }}?redirect={{ request.url_root|urlencode }}" data-i18n="logout">Abmelden</a></div>{% endif %}
+    </div>
+    {% endif %}
+  </aside>
+  <div class="content">
+    <header class="topbar">
+      <button class="menubtn" id="menubtn" aria-controls="sidebar" aria-expanded="false">{{ icon('menu') }}<span class="sr-only" data-i18n="menu">Menü</span></button>
+      <div>
+        <div class="crumbs"><a href="{{ url_for('pages.home') }}" data-i18n="crumb_home">Start</a> /
+          {% if parent_crumb %}<a href="{{ url_for(parent_crumb[0]) }}" data-i18n="{{ parent_crumb[1] }}">{{ parent_crumb[2] }}</a> / {% endif %}<span data-i18n="{{ page_i18n }}">{{ page_title }}</span></div>
+        <h1 data-i18n="{{ page_i18n }}">{{ page_title }}</h1>
+      </div>
+      <div class="topright">
+        <div class="langsel" role="group" aria-label="Sprache" data-i18n-aria="language">
+          <button type="button" data-lang="de" aria-pressed="true">DE</button><button type="button" data-lang="en" aria-pressed="false">EN</button><button type="button" data-lang="id" aria-pressed="false">ID</button>
+        </div>
+        {% if identity and identity.roles %}
+        <a class="bell" href="{{ url_for('pages.my_notifications' if identity.is_candidate else 'pages.notifications') }}"
+           data-i18n-aria="nt_title" aria-label="Benachrichtigungen">{{ icon('bell') }}<span class="bell-count" hidden></span></a>
+        {% endif %}
+        {% if identity %}
+        <div class="usermenu">
+          <b>{{ identity.username }}</b>
+          <span>{% for role in identity.roles|sort %}<span data-i18n="role_{{ role }}">{{ role }}</span>{% if not loop.last %}, {% endif %}{% else %}<span data-i18n="role_none">Keine Rolle</span>{% endfor %}</span>
+          {% if logout_url %}<a class="logout" href="{{ logout_url }}?redirect={{ request.url_root|urlencode }}" data-i18n="logout">Abmelden</a>{% endif %}
+        </div>
+        {% endif %}
+      </div>
+    </header>
+    <main id="main">
+      {% block content %}{% endblock %}
+    </main>
+  </div>
+</div>
+<div id="toasts" role="status" aria-live="polite"></div>
+<script src="{{ url_for('static', filename='js/i18n.js') }}?v={{ asset_version }}"></script>
+<script src="{{ url_for('static', filename='js/i18n_lesson.js') }}?v={{ asset_version }}"></script>
+<script src="{{ url_for('static', filename='js/core.js') }}?v={{ asset_version }}"></script>
+{% block scripts %}{% endblock %}
+</body>
+</html>

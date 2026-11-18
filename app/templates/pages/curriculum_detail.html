@@ -1,0 +1,4 @@
+{% extends 'base.html' %}
+{% block content %}<div id="page" data-curriculum-id="{{ curriculum_id }}"></div>{% endblock %}
+{% block scripts %}<script src="{{ url_for('static', filename='js/module_form.js') }}?v={{ asset_version }}"></script>
+<script src="{{ url_for('static', filename='js/pages/curriculum_detail.js') }}?v={{ asset_version }}"></script>{% endblock %}

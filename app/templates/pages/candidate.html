@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block content %}<div id="page" data-candidate-id="{{ candidate_id }}"></div>{% endblock %}
+{% block scripts %}<script src="{{ url_for('static', filename='js/attendance_form.js') }}?v={{ asset_version }}"></script>
+<script src="{{ url_for('static', filename='js/assessment_form.js') }}?v={{ asset_version }}"></script>
+<script src="{{ url_for('static', filename='js/charts.js') }}?v={{ asset_version }}"></script>
+<script src="{{ url_for('static', filename='js/progress_view.js') }}?v={{ asset_version }}"></script>
+<script src="{{ url_for('static', filename='js/candidate_form.js') }}?v={{ asset_version }}"></script>
+<script src="{{ url_for('static', filename='js/session_form.js') }}?v={{ asset_version }}"></script>
+<script src="{{ url_for('static', filename='js/activity_list.js') }}?v={{ asset_version }}"></script>
+<script src="{{ url_for('static', filename='js/lesson_view.js') }}?v={{ asset_version }}"></script>
+<script src="{{ url_for('static', filename='js/pages/candidate.js') }}?v={{ asset_version }}"></script>{% endblock %}

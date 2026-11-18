@@ -1,0 +1,43 @@
+{
+    "name": "azubi-training",
+    "description": "Azubi-Training: Trainings-Monitoring + Sprachkurs-Verwaltung der Azubi-Kandidaten (Noxt x Planville)",
+    "port": 8000,
+    "health_check": "/health",
+    "docs_path": "/docs",
+    "auth_check_path": "/api/ping",
+    "auth_mode": "msh",
+    "environment": {
+        "SUPER_ADMINS": "",
+        "SCHOOL_TZ": "Asia/Jakarta",
+        "UPLOAD_DIR": "/app/uploads"
+    },
+    "resources": [
+        "postgres"
+    ],
+    "kind": "deployment",
+    "modes": {
+        "main": {
+            "replicas": 1,
+            "memory_limit": "512Mi",
+            "cpu_limit": "300m"
+        }
+    },
+    "volumes": [
+        {
+            "mount_path": "/app/uploads",
+            "storage_size": "10Gi"
+        }
+    ],
+    "snapshot": {
+        "enabled": true,
+        "postgres_container": "postgres",
+        "postgres_user": "svc_azubi_training",
+        "postgres_db": "svc_azubi_training",
+        "seed_required": false,
+        "masking": {
+            "enabled": true,
+            "rules_container": "azubi-training",
+            "rules_path": "/app/mask.sql"
+        }
+    }
+}

@@ -1,0 +1,6 @@
+{% extends 'base.html' %}
+{% block content %}<div id="page" data-course-id="{{ course_id }}"></div>{% endblock %}
+{% block scripts %}<script src="{{ url_for('static', filename='js/attendance_form.js') }}?v={{ asset_version }}"></script>
+<script src="{{ url_for('static', filename='js/course_form.js') }}?v={{ asset_version }}"></script>
+<script src="{{ url_for('static', filename='js/session_form.js') }}?v={{ asset_version }}"></script>
+<script src="{{ url_for('static', filename='js/pages/course.js') }}?v={{ asset_version }}"></script>{% endblock %}
